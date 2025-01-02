@@ -42,9 +42,7 @@ test:
     - dbt.adapters
   commands:
     - pip check
-    - PYTHONPATH=$(pwd) pytest -vvv tests/  # [not win]
-    #'PYTHONPATH' is not recognized as an internal or external command
-    - set PYTHONPATH=%cd% && pytest -vvv tests/  # [win]
+    - python -m pytest -v tests
   requires:
     - pip
     - pytest
