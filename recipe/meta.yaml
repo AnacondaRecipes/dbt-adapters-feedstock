@@ -57,6 +57,11 @@ about:
   description: The set of adapter protocols and base functionality that supports integration with dbt-core
 
 extra:
+  anaconda-services:
+    ref: https://anaconda.zendesk.com/agent/tickets/63495
+    reason: Dependency for dbt-core
+  recipe-maintainers:
+    - ianaobi
   recipe-maintainers:
     - conda-forge/dbt
     - thewchan
