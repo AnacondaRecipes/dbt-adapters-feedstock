@@ -1,0 +1,25 @@
+From 1457359fb075a4cdd2cc15617cb566a950bd7a78 Mon Sep 17 00:00:00 2001
+From: Andrii Osipov <aosipov@anaconda.com>
+Date: Thu, 4 Sep 2025 01:30:49 -0700
+Subject: [PATCH] update protobuf version
+
+---
+ pyproject.toml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/pyproject.toml b/pyproject.toml
+index 3e149ba..e3579e3 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -33,7 +33,7 @@ dependencies = [
+     # installed via dbt-common but used directly
+     "agate>=1.0,<2.0",
+     "mashumaro[msgpack]>=3.9,<3.15",
+-    "protobuf>=6.0,<7.0",
++    "protobuf>=5.0,<7.0",
+     "typing-extensions>=4.0,<5.0",
+ ]
+ [project.urls]
+-- 
+2.39.3 (Apple Git-146)
+
