@@ -54,7 +54,8 @@ about:
   dev_url: https://github.com/dbt-labs/dbt-adapters
   doc_url: https://docs.getdbt.com
   summary: The set of adapter protocols and base functionality that supports integration with dbt-core
-  description: The set of adapter protocols and base functionality that supports integration with dbt-core
+  description: |
+    The set of adapter protocols and base functionality that supports integration with dbt-core
 
 extra:
   recipe-maintainers:
