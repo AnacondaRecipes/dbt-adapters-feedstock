@@ -1,18 +1,18 @@
 {% set name = "dbt-adapters" %}
-{% set version = "1.22.0" %}
+{% set version = "1.24.5" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_')}}-{{ version }}.tar.gz
-  sha256: 0af901f9cee81342c2e113419685c0256108f0687b5ef4cb30af5f243f85af41
+  sha256: 87de096a0d5b219905f1079b002f13e3447ffb63558f4f3c5b7278670d198acb
 
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  skip: true  # [py<310 or py>313]
+  skip: true  # [py<310]
 
 requirements:
   host:
@@ -25,13 +25,16 @@ requirements:
     - dbt-protos >=1.0.291,<2.0
     - pytz >=2015.7
     - agate >=1.0,<2.0
-    # The msgpack pkg needs for "mashumaro[msgpack]>=3.9,<3.15"
+    # The msgpack pkg needs for "mashumaro[msgpack]>=3.9,<3.18"
     # correct version is msgpack>=0.5.6
-    - mashumaro >=3.9,<3.15
+    - mashumaro >=3.9,<3.18
     - msgpack-python >=0.5.6
     - protobuf >=6.0,<7.0
     - typing-extensions >=4.0,<5.0
 
+# E   jinja2.exceptions.TemplateNotFound: 'apply_grants.sql' not found in search path: 'src/dbt/include/global_project/macros/adapters'
+{% set deselect_tests = " --deselect=tests/unit/test_base_adapter.py::TestGrantsMacroQuotesGrantees::test_grant_macro_does_not_quote_grantees" %}
+{% set deselect_tests = deselect_tests + " --deselect=tests/unit/test_base_adapter.py::TestGrantsMacroQuotesGrantees::test_revoke_macro_quotes_grantees" %}
 test:
   source_files:
     - tests
@@ -39,7 +42,7 @@ test:
     - dbt.adapters
   commands:
     - pip check
-    - python -m pytest -v tests
+    - python -m pytest -v tests {{ deselect_tests }}
   requires:
     - pip
     - pytest
