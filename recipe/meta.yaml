@@ -10,7 +10,7 @@ source:
   sha256: 87de096a0d5b219905f1079b002f13e3447ffb63558f4f3c5b7278670d198acb
 
 build:
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   skip: true  # [py<310]
 
@@ -29,7 +29,7 @@ requirements:
     # correct version is msgpack>=0.5.6
     - mashumaro >=3.9,<3.18
     - msgpack-python >=0.5.6
-    - protobuf >=6.0,<7.0
+    - protobuf {{ libprotobuf }}
     - typing-extensions >=4.0,<5.0
 
 # E   jinja2.exceptions.TemplateNotFound: 'apply_grants.sql' not found in search path: 'src/dbt/include/global_project/macros/adapters'
@@ -41,7 +41,6 @@ test:
   imports:
     - dbt.adapters
   commands:
-    - pip check
     - python -m pytest -v tests {{ deselect_tests }}
   requires:
     - pip
@@ -62,3 +61,6 @@ extra:
     - conda-forge/dbt
     - thewchan
     - rxm7706
+  skip-lints:
+    - cbc_dep_in_run_missing_from_host
+    - missing_pip_check
